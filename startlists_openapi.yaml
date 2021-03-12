@@ -1,0 +1,2049 @@
+swagger: '2.0'
+info:
+  title: ORDS generated API for startlists
+  description: Rest API for getting startlist information
+  version: 1.0.0
+  contact:
+    url: 'https://www.atg.se'
+    name: ATG
+host: 'vltapexa01.qa.hh.atg.se:8080'
+basePath: /ords/uinfo/infosys/startlists/v1
+schemes:
+  - http
+produces:
+  - application/json
+paths:
+  '/{date}/{trackid}':
+    get:
+      description: Get an overview of a raceday
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/raceday'
+      parameters:
+        - $ref: '#/parameters/date'
+        - $ref: '#/parameters/trackid'
+      summary: Raceday
+      operationId: getRaceDay
+    parameters:
+      - $ref: '#/parameters/date'
+      - $ref: '#/parameters/trackid'
+  '/{date}/{trackid}/{racenumber}':
+    get:
+      description: Get information of a specific race for the raceday
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/race'
+      parameters:
+        - $ref: '#/parameters/date'
+        - $ref: '#/parameters/trackid'
+        - $ref: '#/parameters/racenumber'
+      summary: Race information
+      operationId: getRace
+    parameters:
+      - $ref: '#/parameters/date'
+      - $ref: '#/parameters/trackid'
+      - $ref: '#/parameters/racenumber'
+  '/{date}/{trackid}/{racenumber}/{startnumber}':
+    get:
+      description: Get information of a specific start for the raceday
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/start'
+      parameters:
+        - $ref: '#/parameters/date'
+        - $ref: '#/parameters/trackid'
+        - $ref: '#/parameters/racenumber'
+        - $ref: '#/parameters/startnumber'
+      summary: Start information
+      operationId: getStart
+    parameters:
+      - $ref: '#/parameters/date'
+      - $ref: '#/parameters/trackid'
+      - $ref: '#/parameters/racenumber'
+      - $ref: '#/parameters/startnumber'
+  '/{date}/{trackid}/{racenumber}/{startnumber}/horse':
+    get:
+      description: Get extra information of the starting horse of a race
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/horse'
+      parameters:
+        - $ref: '#/parameters/date'
+        - $ref: '#/parameters/trackid'
+        - $ref: '#/parameters/racenumber'
+        - $ref: '#/parameters/startnumber'
+      summary: Horse information
+      operationId: getHorse
+    parameters:
+      - $ref: '#/parameters/date'
+      - $ref: '#/parameters/trackid'
+      - $ref: '#/parameters/racenumber'
+      - $ref: '#/parameters/startnumber'
+  '/{date}/{trackid}/{racenumber}/{startnumber}/horse/results':
+    get:
+      description: Get previous results of the starting horse of a race
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/results'
+      parameters:
+        - $ref: '#/parameters/date'
+        - $ref: '#/parameters/trackid'
+        - $ref: '#/parameters/racenumber'
+        - $ref: '#/parameters/startnumber'
+      summary: Horse results
+      operationId: getHorseResults
+    parameters:
+      - $ref: '#/parameters/date'
+      - $ref: '#/parameters/trackid'
+      - $ref: '#/parameters/racenumber'
+      - $ref: '#/parameters/startnumber'
+  '/{date}/{trackid}/{racenumber}/{startnumber}/horse/statistics/currentyear':
+    get:
+      description: Get statistics for the current year of the starting horse of a race
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/currentyear'
+      parameters:
+        - $ref: '#/parameters/date'
+        - $ref: '#/parameters/trackid'
+        - $ref: '#/parameters/racenumber'
+        - $ref: '#/parameters/startnumber'
+      summary: Horse stats current year
+      operationId: getCurrentYearStats
+    parameters:
+      - $ref: '#/parameters/date'
+      - $ref: '#/parameters/trackid'
+      - $ref: '#/parameters/racenumber'
+      - $ref: '#/parameters/startnumber'
+  '/{date}/{trackid}/{racenumber}/{startnumber}/horse/statistics/lifetime':
+    get:
+      description: Get lifetime statistics of the starting horse of a race
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/lifetime'
+      parameters:
+        - $ref: '#/parameters/date'
+        - $ref: '#/parameters/trackid'
+        - $ref: '#/parameters/racenumber'
+        - $ref: '#/parameters/startnumber'
+      summary: Horse stats lifetime
+      operationId: getLifetimeStats
+    parameters:
+      - $ref: '#/parameters/date'
+      - $ref: '#/parameters/trackid'
+      - $ref: '#/parameters/racenumber'
+      - $ref: '#/parameters/startnumber'
+  '/{date}/{trackid}/{racenumber}/{startnumber}/horse/statistics/previousyear':
+    get:
+      description: Get statistics for the previous year of the starting horse of a race
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/previousyear'
+      parameters:
+        - $ref: '#/parameters/date'
+        - $ref: '#/parameters/trackid'
+        - $ref: '#/parameters/racenumber'
+        - $ref: '#/parameters/startnumber'
+      summary: Horse stats previous year
+      operationId: getPreviousYearStats
+    parameters:
+      - $ref: '#/parameters/date'
+      - $ref: '#/parameters/trackid'
+      - $ref: '#/parameters/racenumber'
+      - $ref: '#/parameters/startnumber'
+parameters:
+  date:
+    name: date
+    in: path
+    required: true
+    type: string
+    description: The date of the raceday in format 'YYYY-MM-DD'
+  trackid:
+    name: trackid
+    in: path
+    required: true
+    type: number
+    description: ID of track in numerical format
+  racenumber:
+    name: racenumber
+    in: path
+    required: true
+    type: number
+    description: Number of the race
+  startnumber:
+    name: startnumber
+    in: path
+    required: true
+    type: number
+    description: Number of the start
+responses:
+  race:
+    description: 'Example response for /{date}/{trackid}/{racenumber}'
+    schema:
+      description: ''
+      type: object
+      properties:
+        requestInfo:
+          type: object
+          properties:
+            raceDate:
+              type: string
+              minLength: 1
+            track:
+              type: array
+              uniqueItems: true
+              minItems: 1
+              items:
+                required:
+                  - id
+                  - bettingId
+                  - code
+                  - name
+                properties:
+                  id:
+                    type: number
+                  bettingId:
+                    type: number
+                  code:
+                    type: string
+                    minLength: 1
+                  name:
+                    type: string
+                    minLength: 1
+                  country:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                        - isoCode
+                        - se
+                        - en
+                      properties:
+                        isoCode:
+                          type: string
+                          minLength: 1
+                        se:
+                          type: string
+                          minLength: 1
+                        en:
+                          type: string
+                          minLength: 1
+            raceNumber:
+              type: number
+          required:
+            - raceDate
+            - track
+            - raceNumber
+        numberOfStarters:
+          type: number
+        starts:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+              - startNumber
+              - scratched
+            properties:
+              startNumber:
+                type: number
+              scratched:
+                type: string
+                minLength: 1
+      required:
+        - requestInfo
+        - numberOfStarters
+        - starts
+    examples:
+      application/json:
+        requestInfo:
+          raceDate: '2018-01-06'
+          track:
+            - id: 5
+              bettingId: 9
+              code: B
+              name: Bergsåker
+              country:
+                - isoCode: SE
+                  se: SVERIGE
+                  en: SWEDEN
+          raceNumber: 5
+        numberOfStarters: 15
+        starts:
+          - startNumber: 1
+            scratched: 'false'
+          - startNumber: 2
+            scratched: 'false'
+          - startNumber: 3
+            scratched: 'false'
+          - startNumber: 4
+            scratched: 'true'
+          - startNumber: 5
+            scratched: 'false'
+          - startNumber: 6
+            scratched: 'false'
+          - startNumber: 7
+            scratched: 'false'
+          - startNumber: 8
+            scratched: 'true'
+          - startNumber: 9
+            scratched: 'false'
+          - startNumber: 10
+            scratched: 'false'
+          - startNumber: 11
+            scratched: 'false'
+          - startNumber: 12
+            scratched: 'false'
+          - startNumber: 13
+            scratched: 'false'
+          - startNumber: 14
+            scratched: 'false'
+          - startNumber: 15
+            scratched: 'false'
+  raceday:
+    description: 'Example response for /{date}/{trackid}'
+    schema:
+      description: ''
+      type: object
+      properties:
+        requestInfo:
+          type: object
+          properties:
+            raceDate:
+              type: string
+              minLength: 1
+            track:
+              type: array
+              uniqueItems: true
+              minItems: 1
+              items:
+                required:
+                  - id
+                  - bettingId
+                  - code
+                  - name
+                properties:
+                  id:
+                    type: number
+                  bettingId:
+                    type: number
+                  code:
+                    type: string
+                    minLength: 1
+                  name:
+                    type: string
+                    minLength: 1
+                  country:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                        - isoCode
+                        - se
+                        - en
+                      properties:
+                        isoCode:
+                          type: string
+                          minLength: 1
+                        se:
+                          type: string
+                          minLength: 1
+                        en:
+                          type: string
+                          minLength: 1
+          required:
+            - raceDate
+            - track
+        sport:
+          type: string
+          minLength: 1
+        mainBetType:
+          type: string
+          minLength: 1
+        itspCode:
+          type: string
+          minLength: 1
+        currentRace: {}
+        startTime:
+          type: string
+          minLength: 1
+        xpress:
+          type: string
+          minLength: 1
+        cancelled:
+          type: string
+          minLength: 1
+        results:
+          type: string
+          minLength: 1
+        races:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+              - raceNumber
+              - startTime
+              - status
+            properties:
+              raceNumber:
+                type: number
+              startTime:
+                type: string
+                minLength: 1
+              status:
+                type: string
+                minLength: 1
+              singleRaceBetType:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  required:
+                    - betType
+                    - betStatus
+                  properties:
+                    betType:
+                      type: string
+                      minLength: 1
+                    betStatus:
+                      type: string
+                      minLength: 1
+              multipleRaceBetType:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  required:
+                    - betType
+                    - legNumber
+                    - raceNumberLegOne
+                    - betStatus
+                  properties:
+                    betType:
+                      type: string
+                      minLength: 1
+                    legNumber:
+                      type: number
+                    raceNumberLegOne:
+                      type: number
+                    betStatus:
+                      type: string
+                      minLength: 1
+      required:
+        - requestInfo
+        - sport
+        - mainBetType
+        - itspCode
+        - startTime
+        - xpress
+        - cancelled
+        - results
+        - races
+    examples:
+      application/json:
+        requestInfo:
+          raceDate: '2018-01-06'
+          track:
+            - id: 5
+              bettingId: 9
+              code: B
+              name: Bergsåker
+              country:
+                - isoCode: SE
+                  se: SVERIGE
+                  en: SWEDEN
+        sport: T
+        mainBetType: V75
+        itspCode: BER
+        currentRace: null
+        startTime: '2018-01-06T14:45:00'
+        xpress: 'false'
+        cancelled: 'false'
+        results: 'true'
+        races:
+          - raceNumber: 1
+            startTime: '2018-01-06T14:45:42'
+            status: results
+            singleRaceBetType:
+              - betType: PLATS
+                betStatus: results
+              - betType: TRIO
+                betStatus: results
+              - betType: TVILLING
+                betStatus: results
+              - betType: VINNARE
+                betStatus: results
+            multipleRaceBetType:
+              - betType: V4
+                legNumber: 1
+                raceNumberLegOne: 1
+                betStatus: results
+          - raceNumber: 2
+            startTime: '2018-01-06T15:08:31'
+            status: results
+            singleRaceBetType:
+              - betType: PLATS
+                betStatus: results
+              - betType: TRIO
+                betStatus: results
+              - betType: TVILLING
+                betStatus: results
+              - betType: VINNARE
+                betStatus: results
+            multipleRaceBetType:
+              - betType: V4
+                legNumber: 2
+                raceNumberLegOne: 1
+                betStatus: results
+          - raceNumber: 3
+            startTime: '2018-01-06T15:37:12'
+            status: results
+            singleRaceBetType:
+              - betType: PLATS
+                betStatus: results
+              - betType: TRIO
+                betStatus: results
+              - betType: TVILLING
+                betStatus: results
+              - betType: VINNARE
+                betStatus: results
+            multipleRaceBetType:
+              - betType: LD
+                legNumber: 1
+                raceNumberLegOne: 3
+                betStatus: results
+              - betType: V4
+                legNumber: 3
+                raceNumberLegOne: 1
+                betStatus: results
+          - raceNumber: 4
+            startTime: '2018-01-06T16:01:35'
+            status: results
+            singleRaceBetType:
+              - betType: PLATS
+                betStatus: results
+              - betType: TRIO
+                betStatus: results
+              - betType: TVILLING
+                betStatus: results
+              - betType: VINNARE
+                betStatus: results
+            multipleRaceBetType:
+              - betType: LD
+                legNumber: 2
+                raceNumberLegOne: 3
+                betStatus: results
+              - betType: V4
+                legNumber: 4
+                raceNumberLegOne: 1
+                betStatus: results
+          - raceNumber: 5
+            startTime: '2018-01-06T16:24:59'
+            status: results
+            singleRaceBetType:
+              - betType: PLATS
+                betStatus: results
+              - betType: TRIO
+                betStatus: results
+              - betType: TVILLING
+                betStatus: results
+              - betType: VINNARE
+                betStatus: results
+            multipleRaceBetType:
+              - betType: V75
+                legNumber: 1
+                raceNumberLegOne: 5
+                betStatus: results
+          - raceNumber: 6
+            startTime: '2018-01-06T16:44:25'
+            status: results
+            singleRaceBetType:
+              - betType: PLATS
+                betStatus: results
+              - betType: TRIO
+                betStatus: results
+              - betType: TVILLING
+                betStatus: results
+              - betType: VINNARE
+                betStatus: results
+            multipleRaceBetType:
+              - betType: V75
+                legNumber: 2
+                raceNumberLegOne: 5
+                betStatus: results
+          - raceNumber: 7
+            startTime: '2018-01-06T17:05:00'
+            status: results
+            singleRaceBetType:
+              - betType: PLATS
+                betStatus: results
+              - betType: TRIO
+                betStatus: results
+              - betType: TVILLING
+                betStatus: results
+              - betType: VINNARE
+                betStatus: results
+            multipleRaceBetType:
+              - betType: V5
+                legNumber: 1
+                raceNumberLegOne: 7
+                betStatus: results
+              - betType: V75
+                legNumber: 3
+                raceNumberLegOne: 5
+                betStatus: results
+          - raceNumber: 8
+            startTime: '2018-01-06T17:43:25'
+            status: results
+            singleRaceBetType:
+              - betType: PLATS
+                betStatus: results
+              - betType: TRIO
+                betStatus: results
+              - betType: TVILLING
+                betStatus: results
+              - betType: VINNARE
+                betStatus: results
+            multipleRaceBetType:
+              - betType: V5
+                legNumber: 2
+                raceNumberLegOne: 7
+                betStatus: results
+              - betType: V75
+                legNumber: 4
+                raceNumberLegOne: 5
+                betStatus: results
+          - raceNumber: 9
+            startTime: '2018-01-06T18:05:06'
+            status: results
+            singleRaceBetType:
+              - betType: PLATS
+                betStatus: results
+              - betType: TRIO
+                betStatus: results
+              - betType: TOP7
+                betStatus: results
+              - betType: TVILLING
+                betStatus: results
+              - betType: VINNARE
+                betStatus: results
+            multipleRaceBetType:
+              - betType: V5
+                legNumber: 3
+                raceNumberLegOne: 7
+                betStatus: results
+              - betType: V75
+                legNumber: 5
+                raceNumberLegOne: 5
+                betStatus: results
+          - raceNumber: 10
+            startTime: '2018-01-06T18:25:13'
+            status: results
+            singleRaceBetType:
+              - betType: PLATS
+                betStatus: results
+              - betType: TRIO
+                betStatus: results
+              - betType: TVILLING
+                betStatus: results
+              - betType: VINNARE
+                betStatus: results
+            multipleRaceBetType:
+              - betType: DD
+                legNumber: 1
+                raceNumberLegOne: 10
+                betStatus: results
+              - betType: V3
+                legNumber: 1
+                raceNumberLegOne: 10
+                betStatus: results
+              - betType: V5
+                legNumber: 4
+                raceNumberLegOne: 7
+                betStatus: results
+              - betType: V75
+                legNumber: 6
+                raceNumberLegOne: 5
+                betStatus: results
+          - raceNumber: 11
+            startTime: '2018-01-06T18:45:01'
+            status: results
+            singleRaceBetType:
+              - betType: PLATS
+                betStatus: results
+              - betType: TRIO
+                betStatus: results
+              - betType: TVILLING
+                betStatus: results
+              - betType: VINNARE
+                betStatus: results
+            multipleRaceBetType:
+              - betType: DD
+                legNumber: 2
+                raceNumberLegOne: 10
+                betStatus: results
+              - betType: V3
+                legNumber: 2
+                raceNumberLegOne: 10
+                betStatus: results
+              - betType: V5
+                legNumber: 5
+                raceNumberLegOne: 7
+                betStatus: results
+              - betType: V75
+                legNumber: 7
+                raceNumberLegOne: 5
+                betStatus: results
+          - raceNumber: 12
+            startTime: '2018-01-06T19:01:54'
+            status: results
+            singleRaceBetType:
+              - betType: PLATS
+                betStatus: results
+              - betType: TRIO
+                betStatus: results
+              - betType: TVILLING
+                betStatus: results
+              - betType: VINNARE
+                betStatus: results
+            multipleRaceBetType:
+              - betType: V3
+                legNumber: 3
+                raceNumberLegOne: 10
+                betStatus: results
+  start:
+    description: 'Example response for /{date}/{trackid}/{racenumber}/{startnumber}'
+    schema:
+      description: ''
+      type: object
+      properties:
+        requestInfo:
+          type: object
+          properties:
+            raceDate:
+              type: string
+              minLength: 1
+            track:
+              type: array
+              uniqueItems: true
+              minItems: 1
+              items:
+                required:
+                  - id
+                  - bettingId
+                  - code
+                  - name
+                properties:
+                  id:
+                    type: number
+                  bettingId:
+                    type: number
+                  code:
+                    type: string
+                    minLength: 1
+                  name:
+                    type: string
+                    minLength: 1
+                  country:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                        - isoCode
+                        - se
+                        - en
+                      properties:
+                        isoCode:
+                          type: string
+                          minLength: 1
+                        se:
+                          type: string
+                          minLength: 1
+                        en:
+                          type: string
+                          minLength: 1
+            raceNumber:
+              type: number
+            startNumber:
+              type: number
+          required:
+            - raceDate
+            - track
+            - raceNumber
+            - startNumber
+        scratched:
+          type: string
+          minLength: 1
+        scratchedTimestamp: {}
+        driverChanged:
+          type: string
+          minLength: 1
+        distance:
+          type: number
+        averageOdds:
+          type: number
+        startPoints:
+          type: number
+        frontShoes:
+          type: string
+          minLength: 1
+        backShoes:
+          type: string
+          minLength: 1
+        frontShoesPreviousStart:
+          type: string
+          minLength: 1
+        backShoesPreviousStart:
+          type: string
+          minLength: 1
+        sulky: {}
+        sulkyPreviousStart: {}
+      required:
+        - requestInfo
+        - scratched
+        - driverChanged
+        - distance
+        - averageOdds
+        - startPoints
+        - frontShoes
+        - backShoes
+        - frontShoesPreviousStart
+        - backShoesPreviousStart
+    examples:
+      application/json:
+        requestInfo:
+          raceDate: '2018-01-06'
+          track:
+            - id: 5
+              bettingId: 9
+              code: B
+              name: Bergsåker
+              country:
+                - isoCode: SE
+                  se: SVERIGE
+                  en: SWEDEN
+          raceNumber: 5
+          startNumber: 3
+        scratched: 'false'
+        scratchedTimestamp: null
+        driverChanged: 'false'
+        distance: 2640
+        averageOdds: 38.34
+        startPoints: 882
+        frontShoes: 'true'
+        backShoes: 'true'
+        frontShoesPreviousStart: 'true'
+        backShoesPreviousStart: 'true'
+        sulky: null
+        sulkyPreviousStart: null
+  horse:
+    description: 'Example response for /{date}/{trackid}/{racenumber}/{startnumber}/horse'
+    schema:
+      description: ''
+      type: object
+      properties:
+        requestInfo:
+          type: object
+          properties:
+            raceDate:
+              type: string
+              minLength: 1
+            track:
+              type: array
+              uniqueItems: true
+              minItems: 1
+              items:
+                required:
+                  - id
+                  - bettingId
+                  - code
+                  - name
+                properties:
+                  id:
+                    type: number
+                  bettingId:
+                    type: number
+                  code:
+                    type: string
+                    minLength: 1
+                  name:
+                    type: string
+                    minLength: 1
+                  country:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                        - isoCode
+                        - se
+                        - en
+                      properties:
+                        isoCode:
+                          type: string
+                          minLength: 1
+                        se:
+                          type: string
+                          minLength: 1
+                        en:
+                          type: string
+                          minLength: 1
+            raceNumber:
+              type: number
+            startNumber:
+              type: number
+          required:
+            - raceDate
+            - track
+            - raceNumber
+            - startNumber
+        name:
+          type: string
+          minLength: 1
+        age:
+          type: number
+        regNumber:
+          type: string
+          minLength: 1
+        uelnNumber: {}
+        owner:
+          type: string
+          minLength: 1
+        breeder:
+          type: string
+          minLength: 1
+        colour:
+          type: string
+          minLength: 1
+        sex:
+          type: string
+          minLength: 1
+        breed:
+          type: string
+          minLength: 1
+        nationalityBorn:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+              - isoCode
+              - se
+              - en
+            properties:
+              isoCode:
+                type: string
+                minLength: 1
+              se:
+                type: string
+                minLength: 1
+              en:
+                type: string
+                minLength: 1
+        nationalityRaised:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+              - isoCode
+              - se
+              - en
+            properties:
+              isoCode:
+                type: string
+                minLength: 1
+              se:
+                type: string
+                minLength: 1
+              en:
+                type: string
+                minLength: 1
+        nationalityOwner:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+              - isoCode
+              - se
+              - en
+            properties:
+              isoCode:
+                type: string
+                minLength: 1
+              se:
+                type: string
+                minLength: 1
+              en:
+                type: string
+                minLength: 1
+        sire:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+              - name
+              - regNumber
+            properties:
+              name:
+                type: string
+                minLength: 1
+              regNumber:
+                type: string
+                minLength: 1
+              uelnNumber: {}
+              nationality:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  required:
+                    - isoCode
+                    - se
+                    - en
+                  properties:
+                    isoCode:
+                      type: string
+                      minLength: 1
+                    se:
+                      type: string
+                      minLength: 1
+                    en:
+                      type: string
+                      minLength: 1
+        dam:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+              - name
+              - regNumber
+            properties:
+              name:
+                type: string
+                minLength: 1
+              regNumber:
+                type: string
+                minLength: 1
+              uelnNumber: {}
+              nationality:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  required:
+                    - isoCode
+                    - se
+                    - en
+                  properties:
+                    isoCode:
+                      type: string
+                      minLength: 1
+                    se:
+                      type: string
+                      minLength: 1
+                    en:
+                      type: string
+                      minLength: 1
+        damsire:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+              - name
+              - regNumber
+            properties:
+              name:
+                type: string
+                minLength: 1
+              regNumber:
+                type: string
+                minLength: 1
+              uelnNumber: {}
+              nationality:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  required:
+                    - isoCode
+                    - se
+                    - en
+                  properties:
+                    isoCode:
+                      type: string
+                      minLength: 1
+                    se:
+                      type: string
+                      minLength: 1
+                    en:
+                      type: string
+                      minLength: 1
+      required:
+        - requestInfo
+        - name
+        - age
+        - regNumber
+        - owner
+        - breeder
+        - colour
+        - sex
+        - breed
+        - nationalityBorn
+        - nationalityRaised
+        - nationalityOwner
+        - sire
+        - dam
+        - damsire
+    examples:
+      application/json:
+        requestInfo:
+          raceDate: '2018-01-06'
+          track:
+            - id: 5
+              bettingId: 9
+              code: B
+              name: Bergsåker
+              country:
+                - isoCode: SE
+                  se: SVERIGE
+                  en: SWEDEN
+          raceNumber: 5
+          startNumber: 3
+        name: Pandora Diamant
+        age: 7
+        regNumber: DE-134973
+        uelnNumber: null
+        owner: 'Ardbeg HB, Köpmanholmen'
+        breeder: 'Schwarz Max, Tyskland'
+        colour: BR.
+        sex: S
+        breed: V
+        nationalityBorn:
+          - isoCode: DE
+            se: TYSKLAND
+            en: GERMANY
+        nationalityRaised:
+          - isoCode: DE
+            se: TYSKLAND
+            en: GERMANY
+        nationalityOwner:
+          - isoCode: SE
+            se: SVERIGE
+            en: SWEDEN
+        sire:
+          - name: Igor Font
+            regNumber: IT-AI4516
+            uelnNumber: null
+            nationality:
+              - isoCode: IT
+                se: ITALIEN
+                en: ITALY
+        dam:
+          - name: Lindos Krone
+            regNumber: DE-100180
+            uelnNumber: null
+            nationality:
+              - isoCode: DE
+                se: TYSKLAND
+                en: GERMANY
+        damsire:
+          - name: Elgin Almahurst
+            regNumber: US-9405 B
+            uelnNumber: null
+            nationality:
+              - isoCode: US
+                se: USA
+                en: UNITED STATES
+  results:
+    description: >-
+      Example response for
+      /{date}/{trackid}/{racenumber}/{startnumber}/horse/results
+    schema:
+      description: ''
+      type: object
+      properties:
+        requestInfo:
+          type: object
+          properties:
+            raceDate:
+              type: string
+              minLength: 1
+            track:
+              type: array
+              uniqueItems: true
+              minItems: 1
+              items:
+                required:
+                  - id
+                  - bettingId
+                  - code
+                  - name
+                properties:
+                  id:
+                    type: number
+                  bettingId:
+                    type: number
+                  code:
+                    type: string
+                    minLength: 1
+                  name:
+                    type: string
+                    minLength: 1
+                  country:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                        - isoCode
+                        - se
+                        - en
+                      properties:
+                        isoCode:
+                          type: string
+                          minLength: 1
+                        se:
+                          type: string
+                          minLength: 1
+                        en:
+                          type: string
+                          minLength: 1
+            raceNumber:
+              type: number
+            startNumber:
+              type: number
+          required:
+            - raceDate
+            - track
+            - raceNumber
+            - startNumber
+        horseResults:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+              - date
+              - raceNumber
+              - startNumber
+              - trackCondition
+              - distance
+              - startMethod
+              - monte
+              - postPosition
+              - place
+              - margin
+              - kmTime
+              - totalTime
+              - reported
+              - gallop
+              - disqualified
+              - out
+              - scratched
+              - odds
+              - frontShoes
+              - backShoes
+              - winnings
+            properties:
+              date:
+                type: string
+                minLength: 1
+              raceNumber:
+                type: number
+              startNumber:
+                type: number
+              track:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  required:
+                    - id
+                    - bettingId
+                    - code
+                    - name
+                  properties:
+                    id:
+                      type: number
+                    bettingId:
+                      type: number
+                    code:
+                      type: string
+                      minLength: 1
+                    name:
+                      type: string
+                      minLength: 1
+                    country:
+                      type: array
+                      uniqueItems: true
+                      minItems: 1
+                      items:
+                        required:
+                          - isoCode
+                          - se
+                          - en
+                        properties:
+                          isoCode:
+                            type: string
+                            minLength: 1
+                          se:
+                            type: string
+                            minLength: 1
+                          en:
+                            type: string
+                            minLength: 1
+              surface: {}
+              trackCondition:
+                type: string
+                minLength: 1
+              distance:
+                type: number
+              startMethod:
+                type: string
+                minLength: 1
+              monte:
+                type: string
+                minLength: 1
+              postPosition:
+                type: number
+              place:
+                type: number
+              margin:
+                type: string
+                minLength: 1
+              kmTime:
+                type: string
+                minLength: 1
+              kmCode: {}
+              totalTime:
+                type: string
+                minLength: 1
+              reported:
+                type: string
+                minLength: 1
+              gallop:
+                type: string
+                minLength: 1
+              disqualified:
+                type: string
+                minLength: 1
+              out:
+                type: string
+                minLength: 1
+              scratched:
+                type: string
+                minLength: 1
+              scratchedReason: {}
+              odds:
+                type: string
+                minLength: 1
+              frontShoes:
+                type: string
+                minLength: 1
+              backShoes:
+                type: string
+                minLength: 1
+              sulky: {}
+              winnings:
+                type: number
+              rating: {}
+              weight: {}
+              blinds: {}
+              driver:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  required:
+                    - name
+                    - firstName
+                    - surname
+                    - shortName
+                    - hometrack
+                  properties:
+                    name:
+                      type: string
+                      minLength: 1
+                    firstName:
+                      type: string
+                      minLength: 1
+                    surname:
+                      type: string
+                      minLength: 1
+                    shortName:
+                      type: string
+                      minLength: 1
+                    nationality:
+                      type: array
+                      uniqueItems: true
+                      minItems: 1
+                      items:
+                        required:
+                          - isoCode
+                          - se
+                          - en
+                        properties:
+                          isoCode:
+                            type: string
+                            minLength: 1
+                          se:
+                            type: string
+                            minLength: 1
+                          en:
+                            type: string
+                            minLength: 1
+                    hometrack:
+                      type: string
+                      minLength: 1
+      required:
+        - requestInfo
+        - horseResults
+    examples:
+      application/json:
+        requestInfo:
+          raceDate: '2018-01-06'
+          track:
+            - id: 5
+              bettingId: 9
+              code: B
+              name: Bergsåker
+              country:
+                - isoCode: SE
+                  se: SVERIGE
+                  en: SWEDEN
+          raceNumber: 5
+          startNumber: 3
+        horseResults:
+          - date: '2017-12-25T00:00:00'
+            raceNumber: 9
+            startNumber: 5
+            track:
+              - id: 26
+                bettingId: 27
+                code: U
+                name: Umåker
+                country:
+                  - isoCode: SE
+                    se: SVERIGE
+                    en: SWEDEN
+            surface: null
+            trackCondition: V
+            distance: 2140
+            startMethod: A
+            monte: 'N'
+            postPosition: 5
+            place: 5
+            margin: '2'
+            kmTime: '1165'
+            kmCode: null
+            totalTime: '2438'
+            reported: 'N'
+            gallop: 'N'
+            disqualified: 'N'
+            out: 'N'
+            scratched: 'N'
+            scratchedReason: null
+            odds: '42,10'
+            frontShoes: J
+            backShoes: J
+            sulky: null
+            winnings: 8500
+            rating: null
+            weight: null
+            blinds: null
+            driver:
+              - name: Krister Söderholm
+                firstName: Krister
+                surname: Söderholm
+                shortName: Söd Kr
+                nationality:
+                  - isoCode: SE
+                    se: SVERIGE
+                    en: SWEDEN
+                hometrack: U
+          - date: '2017-12-06T00:00:00'
+            raceNumber: 8
+            startNumber: 5
+            track:
+              - id: 5
+                bettingId: 9
+                code: B
+                name: Bergsåker
+                country:
+                  - isoCode: SE
+                    se: SVERIGE
+                    en: SWEDEN
+            surface: null
+            trackCondition: L
+            distance: 2140
+            startMethod: A
+            monte: 'N'
+            postPosition: 5
+            place: 6
+            margin: HLS
+            kmTime: '1146'
+            kmCode: null
+            totalTime: '2397'
+            reported: 'N'
+            gallop: 'N'
+            disqualified: 'N'
+            out: 'N'
+            scratched: 'N'
+            scratchedReason: null
+            odds: '92,15'
+            frontShoes: J
+            backShoes: J
+            sulky: null
+            winnings: 4000
+            rating: null
+            weight: null
+            blinds: null
+            driver:
+              - name: Krister Söderholm
+                firstName: Krister
+                surname: Söderholm
+                shortName: Söd Kr
+                nationality:
+                  - isoCode: SE
+                    se: SVERIGE
+                    en: SWEDEN
+                hometrack: U
+          - date: '2017-11-17T00:00:00'
+            raceNumber: 3
+            startNumber: 5
+            track:
+              - id: 5
+                bettingId: 9
+                code: B
+                name: Bergsåker
+                country:
+                  - isoCode: SE
+                    se: SVERIGE
+                    en: SWEDEN
+            surface: null
+            trackCondition: L
+            distance: 1640
+            startMethod: A
+            monte: 'N'
+            postPosition: 5
+            place: 5
+            margin: HU
+            kmTime: '1162'
+            kmCode: null
+            totalTime: '2049'
+            reported: 'N'
+            gallop: 'N'
+            disqualified: 'N'
+            out: 'N'
+            scratched: 'N'
+            scratchedReason: null
+            odds: '22,93'
+            frontShoes: J
+            backShoes: J
+            sulky: null
+            winnings: 3200
+            rating: null
+            weight: null
+            blinds: null
+            driver:
+              - name: John Östman
+                firstName: John
+                surname: Östman
+                shortName: Öst Jo
+                nationality:
+                  - isoCode: SE
+                    se: SVERIGE
+                    en: SWEDEN
+                hometrack: U
+          - date: '2017-11-09T00:00:00'
+            raceNumber: 3
+            startNumber: 2
+            track:
+              - id: 5
+                bettingId: 9
+                code: B
+                name: Bergsåker
+                country:
+                  - isoCode: SE
+                    se: SVERIGE
+                    en: SWEDEN
+            surface: null
+            trackCondition: 'N'
+            distance: 1640
+            startMethod: A
+            monte: 'N'
+            postPosition: 2
+            place: 2
+            margin: '5'
+            kmTime: '1141'
+            kmCode: null
+            totalTime: '2015'
+            reported: 'N'
+            gallop: 'N'
+            disqualified: 'N'
+            out: 'N'
+            scratched: 'N'
+            scratchedReason: null
+            odds: '24,48'
+            frontShoes: J
+            backShoes: J
+            sulky: null
+            winnings: 12500
+            rating: null
+            weight: null
+            blinds: null
+            driver:
+              - name: John Östman
+                firstName: John
+                surname: Östman
+                shortName: Öst Jo
+                nationality:
+                  - isoCode: SE
+                    se: SVERIGE
+                    en: SWEDEN
+                hometrack: U
+          - date: '2017-10-29T00:00:00'
+            raceNumber: 8
+            startNumber: 8
+            track:
+              - id: 26
+                bettingId: 27
+                code: U
+                name: Umåker
+                country:
+                  - isoCode: SE
+                    se: SVERIGE
+                    en: SWEDEN
+            surface: null
+            trackCondition: L
+            distance: 1640
+            startMethod: A
+            monte: 'N'
+            postPosition: 8
+            place: 1
+            margin: '0.5'
+            kmTime: '1159'
+            kmCode: null
+            totalTime: '2044'
+            reported: 'N'
+            gallop: 'N'
+            disqualified: 'N'
+            out: 'N'
+            scratched: 'N'
+            scratchedReason: null
+            odds: '10,07'
+            frontShoes: J
+            backShoes: J
+            sulky: null
+            winnings: 10000
+            rating: null
+            weight: null
+            blinds: null
+            driver:
+              - name: Heidi Hiltunen
+                firstName: Heidi
+                surname: Hiltunen
+                shortName: Hil He
+                nationality:
+                  - isoCode: SE
+                    se: SVERIGE
+                    en: SWEDEN
+                hometrack: U
+  previousyear:
+    description: >-
+      Example response for
+      /{date}/{trackid}/{racenumber}/{startnumber}/horse/statistics/previousyear
+    schema:
+      description: ''
+      type: object
+      properties:
+        requestInfo:
+          type: object
+          properties:
+            raceDate:
+              type: string
+              minLength: 1
+            track:
+              type: array
+              uniqueItems: true
+              minItems: 1
+              items:
+                required:
+                  - id
+                  - bettingId
+                  - code
+                  - name
+                properties:
+                  id:
+                    type: number
+                  bettingId:
+                    type: number
+                  code:
+                    type: string
+                    minLength: 1
+                  name:
+                    type: string
+                    minLength: 1
+                  country:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                        - isoCode
+                        - se
+                        - en
+                      properties:
+                        isoCode:
+                          type: string
+                          minLength: 1
+                        se:
+                          type: string
+                          minLength: 1
+                        en:
+                          type: string
+                          minLength: 1
+            raceNumber:
+              type: number
+            startNumber:
+              type: number
+          required:
+            - raceDate
+            - track
+            - raceNumber
+            - startNumber
+        previousYearStatistics:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+              - year
+              - starts
+              - firstPlace
+              - secondPlace
+              - thirdPlace
+            properties:
+              year:
+                type: string
+                minLength: 1
+              starts:
+                type: number
+              firstPlace:
+                type: number
+              secondPlace:
+                type: number
+              thirdPlace:
+                type: number
+              earnings:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  required:
+                    - sum
+                    - currency
+                  properties:
+                    sum:
+                      type: number
+                    currency:
+                      type: string
+                      minLength: 1
+      required:
+        - requestInfo
+        - previousYearStatistics
+    examples:
+      application/json:
+        requestInfo:
+          raceDate: '2018-01-06'
+          track:
+            - id: 5
+              bettingId: 9
+              code: B
+              name: Bergsåker
+              country:
+                - isoCode: SE
+                  se: SVERIGE
+                  en: SWEDEN
+          raceNumber: 5
+          startNumber: 3
+        previousYearStatistics:
+          - year: '2017'
+            starts: 20
+            firstPlace: 3
+            secondPlace: 2
+            thirdPlace: 2
+            earnings:
+              - sum: 90700
+                currency: sek
+  currentyear:
+    description: >-
+      Example response for
+      /{date}/{trackid}/{racenumber}/{startnumber}/horse/statistics/currentyear
+    schema:
+      description: ''
+      type: object
+      properties:
+        requestInfo:
+          type: object
+          properties:
+            raceDate:
+              type: string
+              minLength: 1
+            track:
+              type: array
+              uniqueItems: true
+              minItems: 1
+              items:
+                required:
+                  - id
+                  - bettingId
+                  - code
+                  - name
+                properties:
+                  id:
+                    type: number
+                  bettingId:
+                    type: number
+                  code:
+                    type: string
+                    minLength: 1
+                  name:
+                    type: string
+                    minLength: 1
+                  country:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                        - isoCode
+                        - se
+                        - en
+                      properties:
+                        isoCode:
+                          type: string
+                          minLength: 1
+                        se:
+                          type: string
+                          minLength: 1
+                        en:
+                          type: string
+                          minLength: 1
+            raceNumber:
+              type: number
+            startNumber:
+              type: number
+          required:
+            - raceDate
+            - track
+            - raceNumber
+            - startNumber
+        currentYearStatistics:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+              - year
+              - starts
+              - firstPlace
+              - secondPlace
+              - thirdPlace
+            properties:
+              year:
+                type: string
+                minLength: 1
+              starts:
+                type: number
+              firstPlace:
+                type: number
+              secondPlace:
+                type: number
+              thirdPlace:
+                type: number
+              earnings:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  required:
+                    - currency
+                  properties:
+                    sum: {}
+                    currency:
+                      type: string
+                      minLength: 1
+      required:
+        - requestInfo
+        - currentYearStatistics
+    examples:
+      application/json:
+        requestInfo:
+          raceDate: '2018-01-06'
+          track:
+            - id: 5
+              bettingId: 9
+              code: B
+              name: Bergsåker
+              country:
+                - isoCode: SE
+                  se: SVERIGE
+                  en: SWEDEN
+          raceNumber: 5
+          startNumber: 3
+        currentYearStatistics:
+          - year: '2018'
+            starts: 0
+            firstPlace: 0
+            secondPlace: 0
+            thirdPlace: 0
+            earnings:
+              - sum: null
+                currency: sek
+  lifetime:
+    description: Example response
+    schema:
+      description: ''
+      type: object
+      properties:
+        requestInfo:
+          type: object
+          properties:
+            raceDate:
+              type: string
+              minLength: 1
+            track:
+              type: array
+              uniqueItems: true
+              minItems: 1
+              items:
+                required:
+                  - id
+                  - bettingId
+                  - code
+                  - name
+                properties:
+                  id:
+                    type: number
+                  bettingId:
+                    type: number
+                  code:
+                    type: string
+                    minLength: 1
+                  name:
+                    type: string
+                    minLength: 1
+                  country:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                        - isoCode
+                        - se
+                        - en
+                      properties:
+                        isoCode:
+                          type: string
+                          minLength: 1
+                        se:
+                          type: string
+                          minLength: 1
+                        en:
+                          type: string
+                          minLength: 1
+            raceNumber:
+              type: number
+            startNumber:
+              type: number
+          required:
+            - raceDate
+            - track
+            - raceNumber
+            - startNumber
+        lifeTimeStatistics:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+              - starts
+              - firstPlace
+              - secondPlace
+              - thirdPlace
+            properties:
+              starts:
+                type: number
+              firstPlace:
+                type: number
+              secondPlace:
+                type: number
+              thirdPlace:
+                type: number
+              earnings:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  required:
+                    - sum
+                    - currency
+                  properties:
+                    sum:
+                      type: number
+                    currency:
+                      type: string
+                      minLength: 1
+      required:
+        - requestInfo
+        - lifeTimeStatistics
+    examples:
+      application/json:
+        requestInfo:
+          raceDate: '2018-01-06'
+          track:
+            - id: 5
+              bettingId: 9
+              code: B
+              name: Bergsåker
+              country:
+                - isoCode: SE
+                  se: SVERIGE
+                  en: SWEDEN
+          raceNumber: 5
+          startNumber: 3
+        lifeTimeStatistics:
+          - starts: 56
+            firstPlace: 9
+            secondPlace: 4
+            thirdPlace: 5
+            earnings:
+              - sum: 234397
+                currency: sek
+definitions: {}
